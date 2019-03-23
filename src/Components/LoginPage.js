@@ -37,17 +37,15 @@ class LoginPage extends Component {
         if(this.isValid2()){
           this.props.actions.Login({email:this.state.email,password:this.state.password})
           .then((success)=>{
-          
-            console.log(success);        
+                
             this.setState({
               errors:{},
               isLoading:false,
             });
             Actions.pop();
-            Actions.dash();
+            Actions.dash({isAuth:this.props.userState.isAuth});
                
           }).catch((err)=>{
-            console.log(err);
                
             });
         }
@@ -102,7 +100,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state){
      
   return{
-    state:state.setAuthUser,
+    userState:state.setAuthUser,
   }
 }
 

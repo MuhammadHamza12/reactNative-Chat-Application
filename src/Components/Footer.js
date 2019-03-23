@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Badge,Container, Icon,Header, Content, Footer, FooterTab, Button, Text } from 'native-base';
 import * as sharedActions from './../Actions/SharedActions/SharedActions';
 
-import {Actions } from 'react-native-router-flux';
+import {Actions, ActionConst } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {  bindActionCreators } from 'redux';
 class FooterTabsExample extends Component {
@@ -18,7 +18,10 @@ class FooterTabsExample extends Component {
   }
    PureLogout = async () =>{
     this.props.actions.logout();
-    Actions.main();
+    Actions.popTo('main');
+
+    
+  
   }
   
   render() {

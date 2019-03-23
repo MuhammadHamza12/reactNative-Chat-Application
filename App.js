@@ -15,7 +15,7 @@ import SignUpPage from './src/Components/SignUpPage';
 import { Dashboard } from './src/Components/Dashboard';
 import Main from './src/Components/Main';
 import configureStore from './src/Store/configureStore';
-import { Router,Scene } from 'react-native-router-flux';
+import { Router,Scene, Actions, ActionConst } from 'react-native-router-flux';
 import { TouchableOpacity ,Platform, StyleSheet, Text, View , Animated }  from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
 import Head from './src/Components/Head';
@@ -37,7 +37,8 @@ const instructions = Platform.select({
 
 AsyncStorage.getItem('jwtToken')    
 .then((data)=>{
-      store.dispatch(sharedAction.setCurrentUser(jwt(data)));
+  console.log('get token',data);    
+  store.dispatch(sharedAction.setCurrentUser(jwt(data)));
         sharedAction.saveUserTokenToAsyc(data)
         setAuthToken(data);
     }).catch((err)=>{
@@ -52,6 +53,7 @@ export default class App extends Component {
       <Scene key="root">
         <Scene
           // key="tabbar"
+        
           renderTitle={Head}          
           tab={true}
           >

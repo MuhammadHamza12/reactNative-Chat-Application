@@ -4,7 +4,6 @@ import Axios from 'axios';
 import { AsyncStorage } from 'react-native';
 import setAuthToken from '../../config/setAuthToken';
 import jwt from 'jwt-decode';
-import console = require('console');
 
 export function setLoader(flag) {
     return {
@@ -51,11 +50,22 @@ export function setCurrentUser(data){
 }
 export function logout(){
     return (dispatch) => {
-        removerUserTokenFromAsync();
+       if(removeItemValue('jwtToken')){
+        console.log('value true mili h');   
         setAuthToken(false);
-      dispatch(this.setCurrentUser({}));
-    };
+           dispatch(this.setCurrentUser({}));
+       }
+};
 }  
+async function removeItemValue(key) {
+    try {
+      await AsyncStorage.removeItem(key);
+      return true;
+    }
+    catch(exception) {
+      return false;
+    }
+  }
 const removerUserTokenFromAsync=()=>dispatch =>{
     AsyncStorage.removeItem('jwtToken')
     .then((data)=>{
