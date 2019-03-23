@@ -19,12 +19,14 @@ import { Router,Scene } from 'react-native-router-flux';
 import { TouchableOpacity ,Platform, StyleSheet, Text, View , Animated }  from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
 import Head from './src/Components/Head';
+import Active from './src/Components/Active';
 import Form from './src/Components/Form.js';
 import SignUp from './src/Components/SignUp.js';
+import Profile from './src/Components/Profile';
 import * as sharedAction from './src/Actions/SharedActions/SharedActions'
 import setAuthToken from './src/config/setAuthToken';
 // import jwt from 'jsonwebtoken';
-// import jwt from 'jwt-decode';
+import jwt from 'jwt-decode';
 const store = configureStore();
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -33,27 +35,14 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-console.log('we are in APP.js');
-debugger;
-// AsyncStorage.removeItem('jwtToken')
-//     .then((data)=>{
-//         console.log('token might be remove now',data);
-//     }).catch((err)=>{
-//         console.log('error in removing token from asyncstorage');
-//     });
-
-// AsyncStorage.getItem('jwtToken')
-//     .then((data)=>{
-//         debugger;
-//         console.log(data);
-//         // sharedAction.saveUserTokenToAsyc(data)
-//         // setAuthToken(data);
-//         // store.dispatch(sharedAction.setCurrentUser(jwt(data)));
-//     }).catch((err)=>{
-//         console.log('checking in error err',err);
-//         debugger;
-//         console.log(err);
-//     });
+AsyncStorage.getItem('jwtToken')    
+.then((data)=>{
+      store.dispatch(sharedAction.setCurrentUser(jwt(data)));
+        sharedAction.saveUserTokenToAsyc(data)
+        setAuthToken(data);
+    }).catch((err)=>{
+       
+    });
 
 export default class App extends Component {
   render() {
@@ -62,22 +51,23 @@ export default class App extends Component {
       <Router>
       <Scene key="root">
         <Scene
-          key="tabbar"
+          // key="tabbar"
           renderTitle={Head}          
           tab={true}
           >
             <Scene initial key="main" component={(props)=> <Main {...props} />} hideNavBar={true}  />
+            <Scene key="dash" component={Dashboard} hideNavBar={true} /> 
+            <Scene key="active" component={Active} hideNavBar={true} /> 
+            <Scene key="profile" component={Profile} hideNavBar={true} /> 
 
             {/* <Scene key="dummy" component={(props) => <SignUp {...props} />} hideNavBar={true} /> */}
-            <Scene key="dash" component={Dashboard} hideNavBar={true} />
- 
            {/* <Scene key="gold" component={GlodScreen} hideNavBar={true} title="Gold"  />
-            
             <Scene key="black" component={BlackScreen} hideNavBar={true} title="Black" />
             <Scene key="blue" component={BlueScreen} hideNavBar={true} title="Blue"  />
 
-            <Scene key="maize" component={MaizeScreen} hideNavBar={true} title="Maize" /> */}
+            <Scene key="maize" component={MaizeScreen} hideNavBar={true} title="Maize" /> */} 
       </Scene>
+  
           <Scene
             key="modal"
             direction="vertical"

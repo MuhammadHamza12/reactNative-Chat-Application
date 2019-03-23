@@ -35,20 +35,21 @@ class LoginPage extends Component {
           isLoading:true,
         });
         if(this.isValid2()){
-          // this.props.actions.Login({email:this.state.email,password:this.state.password})
-          // .then((success)=>{
-          //   console.log(success);        
-          //   this.setState({
-          //     errors:{},
-          //     isLoading:false,
-          //   });
-    
-            
-          //   debugger;
-          // }).catch((err)=>{
-          //   console.log(err);
-          //   debugger;
-          //   });
+          this.props.actions.Login({email:this.state.email,password:this.state.password})
+          .then((success)=>{
+          
+            console.log(success);        
+            this.setState({
+              errors:{},
+              isLoading:false,
+            });
+            Actions.pop();
+            Actions.dash();
+               
+          }).catch((err)=>{
+            console.log(err);
+               
+            });
         }
       }
   render() {
@@ -93,12 +94,16 @@ class LoginPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
-
-const mapDispatchToProps = {
-  
+function mapDispatchToProps(dispatch) {
+  return{
+    actions:bindActionCreators(sharedActions,dispatch),
+  };
+}
+function mapStateToProps(state){
+     
+  return{
+    state:state.setAuthUser,
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

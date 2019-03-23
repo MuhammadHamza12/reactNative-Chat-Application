@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SignUp from './SignUp';
 import { Actions } from 'react-native-router-flux';
-
+import Dashboard from './Dashboard';
 export class Main extends Component {
   constructor(props){
     super(props);
@@ -13,6 +13,7 @@ export class Main extends Component {
       FormDisp:false,
       Page:'',
     }
+   
   }
   switchViewToLogin=()=>{
     this.setState({
@@ -36,15 +37,17 @@ export class Main extends Component {
     Actions.dash();
   }
   render() {
-    
-    console.log('in main',Actions);
-    return (
-    <View style={{flex:1,flexDirection:'column'}} >
+    // console.log('user State',this.props.userState.isAuth);
+    // console.log('user State',this.props.userState);
+  
+    // console.log('in main',Actions);
+    const mainCom = (
+<View style={{flex:1,flexDirection:'column'}} >
         <View style={{marginBottom:50}} >
         </View>
         <View style={{ justifyContent:'center',flex:1 }} >
        {/* <SignUp funToDashboard={this.funToDashboard}  page={this.state.Page} funcToBack ={this.switchBackViewToPage} modeopen={this.state.FormDisp} />     */}
-       <TouchableOpacity onPress={()=> Actions.modal()} style={{ marginBottom:45,
+    <TouchableOpacity onPress={()=> Actions.modal()} style={{ marginBottom:45,
     backgroundColor:'blue',
     height:45,
     borderRadius:5,display:(!this.state.FormDisp) ? 'flex':'none'}}>
@@ -73,13 +76,25 @@ export class Main extends Component {
      </View>
       </View>  
     );
+    const dashboard =(
+      <Dashboard />
+    );
+
+    const displayCom =(!this.props.userState.isAuth) ? mainCom : dashboard ;
+
+    return (
+      <View style={{flex:1,flexDirection:'column'}} >
+        {displayCom}
+           </View>
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
-
+function mapStateToProps(state) {
+  return{
+    userState:state.setAuthUser,
+  }
+}
 const mapDispatchToProps = {
   
 }
@@ -112,4 +127,5 @@ const styles = StyleSheet.create({
     backgroundColor:'skyblue',
   }
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

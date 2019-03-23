@@ -3,43 +3,47 @@ import config from '../../config';
 import Axios from 'axios';
 import { AsyncStorage } from 'react-native';
 import setAuthToken from '../../config/setAuthToken';
-// import jwt from 'jwt-decode';
+import jwt from 'jwt-decode';
+import console = require('console');
 
+export function setLoader(flag) {
+    return {
+        type:actionTypes.SET_LOADING_FLAG,
+        payload:flag,
+    }
+}
 
 export const isTokenExist =() => dispatch =>{
-   debugger;
+      
     AsyncStorage.getItem('jwtToken')
     .then((data)=>{
-        debugger;
-        console.log(data);
+           
         // saveUserTokenToAsyc(data);
         // setAuthToken(data);
         // dispatch(this.setCurrentUser(jwt.decode(data)));
     }).catch((err)=>{
-        console.log('in error err',err);
-        debugger;
-        console.log(err);
+           
     });
 }
 
 export function Login(data) {
-    debugger;
+       
     return (dispatch) => {
-        debugger;
+           
       return Axios.post(`${config.localHttp}/login/Auth`, data).then((res) => {
-          console.log('response',res);
+
           const token = res.data.token;
-          console.log(token);
-          debugger;
-        //   saveUserTokenToAsyc(token);
-        //   setAuthToken(token);
-        //   dispatch(this.setCurrentUser(jwt(token)));
+            saveUserTokenToAsyc(token);
+            setAuthToken(token);
+            dispatch(this.setCurrentUser(jwt(token)));
+             
           return res.data;
       });
     };
   }
 
 export function setCurrentUser(data){
+       
     return {
         type:actionTypes.SET_CURRENT_USER,
         payload:data,
@@ -55,17 +59,15 @@ export function logout(){
 const removerUserTokenFromAsync=()=>dispatch =>{
     AsyncStorage.removeItem('jwtToken')
     .then((data)=>{
-        console.log('token might be remove now',data);
+    console.log('result of removing data',data);
     }).catch((err)=>{
-        console.log('error in removing token from asyncstorage');
+        console.log('error in removing token');
     });
 }
-export const saveUserTokenToAsyc=(token)=> dispatch =>{
+export async function saveUserTokenToAsyc(token){
     AsyncStorage.setItem('jwtToken',token)
     .then((data)=>{
-        console.log('data in then in saveUserToken',data);
     }).catch((err)=>{
-        console.log('err in catch',err);
     });
 }
 
@@ -192,7 +194,7 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 // //   return (dispatch) =>{
 // //     doPostRequest({url:url,data:data})
 // //       .then((result)=>{
-// //         debugger;
+// //            
 // //         dispatch({
 // //           type:actionTypes.SET_ADMIN_DETAILS,
 // //           payload:result.data,
@@ -201,14 +203,14 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 // //   };
 // // }
 // export function setVotingflag(data) {
-//   debugger;
+//      
 //   return {
 //     type: actionTypes.SET_ADMIN_VOTING_TIME,
 //     payload: data,
 //   };
 // }
 // export function setLoadingFalg(flag) {
-//   debugger;
+//      
 //   return {
 //     type: actionTypes.IS_LOADIND_LAODER,
 //     payload: flag,
@@ -218,7 +220,7 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 // //   return (dispatch) =>{
 // //     doPostRequest({url:'/api/setVoting/Time',data:data})
 // //       .then((result)=>{
-// //         debugger;
+// //            
 // //         // dispatch({
 // //         //   type:actionTypes.SET_ADMIN_VOTING_TIME,
 // //         //   payload:result.data,
@@ -233,7 +235,7 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 //         data: emailId
 //       })
 //       .then((result) => {
-//         debugger;
+//            
 //         dispatch({
 //           type: actionTypes.SET_ADMIN_DETAILS,
 //           payload: result.data,
@@ -246,7 +248,7 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 //   return (dispatch) => {
 //     return axios.get(`${config.localHttp}/api/getCanReq/Data`)
 //       .then((result) => {
-//         debugger;
+//            
 //         console.log(result.data.data);
 //         dispatch({
 //           type: actionTypes.GET_CANDIDATE_REQUEST_DATA,
@@ -263,7 +265,7 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 //   return (dispatch) => {
 //     return axios.get(`${config.localHttp}/api/approved/Candidate`)
 //       .then((result) => {
-//         debugger;
+//            
 //         console.log(result.data.data);
 //         dispatch({
 //           type: actionTypes.GET_APPROVED_DATA,
@@ -283,7 +285,7 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 //     }).then((res) => {
 //       console.log(' action creator response: ', res);
 //       console.log(res.data.data);
-//       debugger;
+//          
 //       dispatch({
 //         type: actionTypes.SET_ADMIN_DETAILS,
 //         payload: res.data.data,
@@ -295,14 +297,14 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 //   };
 // }
 // export function downloadUserDetails(emailId) {
-//   debugger;
+//      
 //   return (dispatch) => {
 //     doPostRequest({
 //         url: '/getUserData/api',
 //         data: emailId
 //       })
 //       .then((result) => {
-//         debugger;
+//            
 //         dispatch({
 //           type: actionTypes.SET_USER_DETAILS,
 //           payload: result.data,
@@ -312,14 +314,14 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 // }
 
 // export function deleteProvidedIdPendCandidateOBJ(OBJID) {
-//   debugger;
+//      
 //   return (dispatch) => {
 //     doPostRequest({
 //       url: '/api/CandidateReq/delete',
 //       data: OBJID
 //     }).then(
 //       (success) => {
-//         debugger;
+//            
 //         dispatch({
 //           type: actionTypes.DELETE_CANDIDATE_REQUEST,
 //           payload: OBJID._id
@@ -338,9 +340,9 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 // }
 // export function GetCountDataForAdmin(url) {
 //   return (dispatch) => {
-//     debugger;
+//        
 //     return axios.get(url).then((res) => {
-//       debugger;
+//          
 //       console.log('action creator response ', res);
 //       console.log(res.data.data);
 //       dispatch(setIntoRedux(res.data.data));
@@ -355,9 +357,9 @@ export const saveUserTokenToAsyc=(token)=> dispatch =>{
 // }
 // export function GetRegisteredVoters(url){
 //   return (dispatch) => {
-//     debugger;
+//        
 //     return axios.get(url).then((res) => {
-//       debugger;
+//          
 //       console.log('action creator response ', res);
 //       console.log(res.data.data);
 //       dispatch(regVoterPutintoRedux(res.data.data));

@@ -60,7 +60,7 @@ class SignUp extends Component {
     }
   }
   clickToMove =()=>{
-    debugger;
+       
     this.backBTN();
     Actions.dash();
   }
@@ -79,17 +79,17 @@ class SignUp extends Component {
       //   });
 
         
-      //   debugger;
+      //      
       // }).catch((err)=>{
       //   console.log(err);
-      //   debugger;
+      //      
       //   });
     }
   }
   render() {
     const {errors} = this.state;
-    console.log(this.props);
-    debugger;
+
+       
     const SignUp = (
       <Modal visible={this.props.modeopen} animationType='slide' >
          <Container style={{display:'flex'}} >
@@ -206,7 +206,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 function mapStateToProps(state){
-  debugger;
+     
   return{
     state:state.setAuthUser,
   }

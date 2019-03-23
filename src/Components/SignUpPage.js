@@ -74,7 +74,6 @@ class SignUpPage extends Component {
       height:45,
       borderRadius:5,width:'100%'}}>
           <View style={{alignSelf:'center',marginTop:8,}} >
-  
           <Text style={{color:'white',    fontWeight:'bold',}} > Submit </Text>
           </View>
           </TouchableOpacity>
