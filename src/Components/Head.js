@@ -10,7 +10,7 @@ import { Icon } from 'native-base';
 export default Head = () =>{
     return(
       <View style={styles.mainhead}>
-        <Text style={styles.toolbar}> <Icon name='chatboxes' style={{color:'white',fontSize:30}} />Cha Room</Text>  
+        <Text style={styles.toolbar}> <Icon name='chatboxes' style={{color:'white',fontSize:30}} />Chat Room</Text>  
          </View>
     );
 }

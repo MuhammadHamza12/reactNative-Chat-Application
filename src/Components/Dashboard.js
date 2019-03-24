@@ -5,21 +5,23 @@ import { connect } from 'react-redux'
 import {AsyncStorage} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import FooterTabsExample from './Footer'; 
+import { GiftedChat } from 'react-native-gifted-chat';
 export class Dashboard extends Component {
   constructor(props){
     super(props);
     this.state ={
       flag:null,
+      messages:[],
     } 
-    AsyncStorage.getItem('jwtToken')    
-.then((data)=>{
-  console.log('get token',data);    
-    if(Object.is(data,null)){
-      console.log('in true');
-      Actions.main();
-    }
-    }).catch((err)=>{  
-    });
+//     AsyncStorage.getItem('jwtToken')    
+// .then((data)=>{
+//   console.log('get token',data);    
+//     if(Object.is(data,null)){
+//       console.log('in true');
+//       Actions.main();
+//     }
+//     }).catch((err)=>{  
+//     });
   }
   
   
@@ -45,19 +47,25 @@ export class Dashboard extends Component {
 //     ToastAndroid.show('Back button is pressed', ToastAndroid.SHORT);
 //     return true;
 //   }
+onSend(messages = []) {
+  this.setState(previousState => ({
+    messages: GiftedChat.append(previousState.messages, messages),
+  }))
+}
+
   render() {
     console.log('flag',this.state.flag);
     return (
       <View style={{flex: 1}}>
       
      <View style={{marginTop:5,flex: .9}}> 
-      <Text>main</Text> 
-      <Text>main</Text> 
-      <Text>main</Text> 
-      <Text>main</Text> 
-      <Text>main</Text> 
-      <Text>main</Text> 
-  
+     <GiftedChat
+        messages={this.state.messages}
+        onSend={messages => this.onSend(messages)}
+        user={{
+          _id: 1,
+        }}
+      />  
       </View>
   
       <View style={{flex: .1}}> 

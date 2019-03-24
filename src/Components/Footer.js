@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View  } from 'react-native';
 import { Badge,Container, Icon,Header, Content, Footer, FooterTab, Button, Text } from 'native-base';
 import * as sharedActions from './../Actions/SharedActions/SharedActions';
 
@@ -26,7 +26,7 @@ class FooterTabsExample extends Component {
   
   render() {
     return (
-        <View>
+        <View >
 
         <Footer style={{backgroundColor:'black'}}  >
           <FooterTab>

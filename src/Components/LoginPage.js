@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text , ToastAndroid , Image, KeyboardAvoidingView } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Modal , TouchableOpacity } from 'react-native';
@@ -42,11 +42,13 @@ class LoginPage extends Component {
               errors:{},
               isLoading:false,
             });
+            ToastAndroid.show('moving forward!',2000);
             Actions.pop();
             Actions.dash({isAuth:this.props.userState.isAuth});
                
           }).catch((err)=>{
-               
+            ToastAndroid.show(err.response.data.errors.form,2000);
+               console.log(err.response.data.errors.form);
             });
         }
       }
@@ -59,7 +61,10 @@ class LoginPage extends Component {
         </Header>
          {/* <Form></Form> */}
           <View style={{justifyContent:'center',marginTop:20}} >
+          <KeyboardAvoidingView  >
           <Item style={{justifyContent:'center'}} >
+
+
           <Icon  style={{fontSize:50}} name='login' type='MaterialCommunityIcons' />
             
              <H1 style={{fontSize:33,fontWeight:'bold'}} >Log In</H1>
@@ -75,9 +80,9 @@ class LoginPage extends Component {
             <Item style={{justifyContent:'center'}} >
      
             <TouchableOpacity onPress={this.getDataLogin} style={{ 
-      backgroundColor:'blue',
-      height:45,
-      borderRadius:5,width:'100%'}}>
+              backgroundColor:'blue',
+              height:45,
+              borderRadius:5,width:'100%'}}>
           <View style={{alignSelf:'center',marginTop:8,}} >
      
           <Text style={{color:'white',    fontWeight:'bold',}} > Submit </Text>
@@ -85,6 +90,7 @@ class LoginPage extends Component {
           </TouchableOpacity>
             
             </Item>
+              </KeyboardAvoidingView>
           </View>
      
         </Container>
