@@ -48,8 +48,8 @@ class SignUpPage extends Component {
         <Head />
         </Header>
          {/* <Form></Form> */}
-          <View style={{justifyContent:'center',marginTop:20}} >
-          <Item style={{justifyContent:'center'}} >
+          <View style={{flex:1,justifyContent:'center'}} >
+          <Item style={{alignSelf:'center'}} >
           <Icon  style={{fontSize:50}} name='account' type='MaterialCommunityIcons' />
            
              <H1 style={{fontSize:33,fontWeight:'bold',marginTop:10}} >

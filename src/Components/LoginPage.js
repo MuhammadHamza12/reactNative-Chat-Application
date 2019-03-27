@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text , ToastAndroid , Image, KeyboardAvoidingView } from 'react-native'
+import { View, Text , ToastAndroid , Image, KeyboardAvoidingView  } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Modal , TouchableOpacity } from 'react-native';
@@ -55,21 +55,18 @@ class LoginPage extends Component {
   render() {
     const {  errors } = this.state;
     return (
-        <Container style={{display:'flex'}} >
+        <Container style={{flex:1}} >
         <Header>
         <Head />
         </Header>
          {/* <Form></Form> */}
+          <View style={{alignSelf:'center',marginTop:20}} >
+
+          <Image source={require('../images/login.png')} style={{height:100,width:100}} />
+          </View>
+         <KeyboardAvoidingView behavior='position' style={{flex:0.4}} >
           <View style={{justifyContent:'center',marginTop:20}} >
-          <KeyboardAvoidingView  >
-          <Item style={{justifyContent:'center'}} >
-
-
-          <Icon  style={{fontSize:50}} name='login' type='MaterialCommunityIcons' />
-            
-             <H1 style={{fontSize:33,fontWeight:'bold'}} >Log In</H1>
-            </Item>
-            <Item error={errors.email} >
+                      <Item error={errors.email} >
               <Icon active name='mail' />
               <Input onChangeText={(email)=> this.setState({email})} textContentType='emailAddress' placeholder='E-mail'/>
             </Item>
@@ -85,13 +82,13 @@ class LoginPage extends Component {
               borderRadius:5,width:'100%'}}>
           <View style={{alignSelf:'center',marginTop:8,}} >
      
-          <Text style={{color:'white',    fontWeight:'bold',}} > Submit </Text>
+          <Text style={{color:'white',    fontWeight:'bold',}} > Login </Text>
           </View>
           </TouchableOpacity>
             
             </Item>
-              </KeyboardAvoidingView>
           </View>
+              </KeyboardAvoidingView>
      
         </Container>
     )

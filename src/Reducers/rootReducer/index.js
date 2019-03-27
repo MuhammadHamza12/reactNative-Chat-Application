@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import setAuthUser from '../AuthUserReducer';
+import setAllUserStatus from '../AllUserStatusRed';
 const rootReducer = combineReducers({
-  setAuthUser,
+  setAuthUser, setAllUserStatus,
 });
 
 export default rootReducer;

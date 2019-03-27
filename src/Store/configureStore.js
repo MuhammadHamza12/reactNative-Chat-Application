@@ -6,15 +6,11 @@ import { persistStore , persistReducer } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 import { AsyncStorage } from 'react-native';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 const persistConfig = {
   key:'root',
   storage:AsyncStorage,
 };
-
-
-
-
-
 
 
 const middleware = [];

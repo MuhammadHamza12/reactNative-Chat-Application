@@ -25,24 +25,12 @@ export class Active extends Component {
       allStatus:[],
       isLoading:true,
     }
-    getAllOnlineStatus((status)=>{
-      debugger;
-      this.setState({
-        allStatus:[...status],
-      });
-  })
   }
-  componentDidMount(){
-    Axios.get(`${config.localHttp}/get/onlinStatus`)
-    .then((success)=>{
-      debugger;
-      this.setState({
-        isLoading:false,
-      });
-    })
-  }
+  
   render() {
-    const ListCom = this.state.allStatus.map((l, i) => (
+    console.log('active props',this.props);
+    const { allStatus } = this.props.sData;
+    const ListCom = allStatus.map((l, i) => (
       <ListItem
         key={i}
         leftAvatar={{ rounded:true , title:l.name.substring(0,2) }}
@@ -57,9 +45,9 @@ export class Active extends Component {
       
       <View style={{marginTop:5,flex: .9}}> 
       <ScrollView>
-      {
-        (this.state.allStatus.length < 1) ? <Spinner size='large' /> : ListCom
-  }
+       {
+        (allStatus.length < 1) ? <Spinner size='large' /> : ListCom
+  } 
   </ScrollView>
        </View>
    
@@ -71,9 +59,11 @@ export class Active extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
+function mapStateToProps(state) {
+  return{
+    sData:state.setAllUserStatus,
+  }
+}
 
 const mapDispatchToProps = {
   

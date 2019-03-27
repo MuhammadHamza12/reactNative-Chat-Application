@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet , View, Text , TouchableOpacity , Image } from 'react-native'
 import {Icon , Spinner } from 'native-base';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import Checking from './Checking';
 import { connect } from 'react-redux'
 import SignUp from './SignUp';
 import { Actions } from 'react-native-router-flux';
@@ -126,7 +127,7 @@ export class Main extends Component {
     );
 
     const displayCom =(!this.props.userState.isAuth) ? mainCom : dashboard ;
-
+    
     return (
       <View style={{flex:1,flexDirection:'column'}} >
         {this.mainRendering(mainCom,dashboard)}
@@ -139,6 +140,7 @@ function mapStateToProps(state) {
   return{
     userState:state.setAuthUser,
     users:state.setAuthUser.users,
+    sData:state.setAllUserStatus,
   }
 }
 const mapDispatchToProps = {

@@ -14,6 +14,8 @@ export class Profile extends Component {
     } catch (error) {
       titlename = '';  
     }
+    const { allStatus } = this.props.sData;
+    console.log('allStatus in profile',allStatus)
     return (
       <View style={{flex: 1}}>
       
@@ -60,7 +62,7 @@ export class Profile extends Component {
       </View>
       </ScrollView>
        <View style={{position:'absolute',left:0,right:0,bottom:0}}> 
-   <FooterTabsExample /> 
+   <FooterTabsExample allStatus={allStatus} /> 
        </View>
        </View>
     )
@@ -71,6 +73,8 @@ function mapStateToProps(state) {
   return{
     userState:state.setAuthUser,
     users:state.setAuthUser.users,
+    sData:state.setAllUserStatus,
+
   }
 }
 const mapDispatchToProps = {

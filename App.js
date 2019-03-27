@@ -5,6 +5,11 @@
  * @format
  * @flow
  */
+console.ignoredYellowBox = ['Remote debugger'];
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings([
+    'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
+]);
 import React, {Component} from 'react';
 import { Image ,AsyncStorage , ActivityIndicator } from 'react-native'
 import { createStore, applyMiddleware } from 'redux';
@@ -18,6 +23,8 @@ import { configureStore , persistor } from './src/Store/configureStore';
 import { Router,Scene, Actions, ActionConst } from 'react-native-router-flux';
 import { TouchableOpacity ,Platform, StyleSheet, Text, View , Animated }  from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
+import FetchDataMiddleware from './src/middleware/middleware';
+
 import Head from './src/Components/Head';
 import Active from './src/Components/Active';
 import Form from './src/Components/Form.js';
@@ -28,6 +35,7 @@ import setAuthToken from './src/config/setAuthToken';
 import { PersistGate } from 'redux-persist/integration/react';
 // import jwt from 'jsonwebtoken';
 import jwt from 'jwt-decode';
+import Checking from './src/Components/Checking';
 const store = configureStore();
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -68,7 +76,7 @@ export default class App extends Component {
           tab={true}
           >
             <Scene initial key="main" component={(props)=> <Main {...props} />} hideNavBar={true}  />
-            <Scene key="dash" component={Dashboard} hideNavBar={true} /> 
+            <Scene key="dash" component={FetchDataMiddleware(Dashboard)} hideNavBar={true} /> 
             <Scene key="active" component={Active} hideNavBar={true} /> 
             <Scene key="profile" component={Profile} hideNavBar={true} /> 
 

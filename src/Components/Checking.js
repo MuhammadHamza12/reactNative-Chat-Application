@@ -5,10 +5,12 @@ import * as sharedActions from './../Actions/SharedActions/SharedActions';
 import {Actions, ActionConst } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { getAllOnlineStatus } from './../socketapi/api';
+import FooterTabsExample from './Footer'; 
+
 import Axios from 'axios';
 import config from '../config/index';
 import {  bindActionCreators } from 'redux';
-class FooterTabsExample extends Component {
+class Checking extends Component {
   _isMounted = true;
   constructor(props){
 
@@ -16,6 +18,7 @@ class FooterTabsExample extends Component {
     this.state={
       flag:true,
       mount:true,
+      messages:[],
       allStatus:[],
       userState:null,
       isLoading:false,
@@ -111,30 +114,13 @@ class FooterTabsExample extends Component {
     const  allStatus  = this.props.allStatus;
     console.log('log ',allStatus);
     return (
-        <View >
-
-        <Footer style={{backgroundColor:'black'}}  >
-          <FooterTab>
-            <Button active onPress={this.MoveToActive} >
-              <Icon name='home' />
-              <Text>Home</Text>
-            </Button>
-            <Button onPress={()=> Actions.profile()}  >
-            <Icon name='person' />
-              <Text>Profile</Text> 
-            </Button>
-            <Button onPress={()=>Actions.active()} badge vertical >
-            <Badge><Text>{ this.state.isLoading ? <Icon name='timer' style={{fontSize:15}} /> : allStatus.length}</Text></Badge>
-            <Icon name='people' />
-              <Text>Active</Text> 
-            </Button>
-            <Button onPress={this.PureLogout}  >
-            <Icon name='arrow-back' />
-              <Text>Logout</Text> 
-            </Button>
-          </FooterTab>
-        </Footer>
-         </View>
+        <View style={{flex:1,justifyContent:'center'}} >
+        
+         <Text>hello</Text>
+         <View style={{position:'absolute',left:0,right:0,bottom:0}}> 
+   <FooterTabsExample /> 
+       </View>
+      </View>
     );
   }
 }
@@ -150,4 +136,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(FooterTabsExample);
+export default connect(mapStateToProps,mapDispatchToProps)(Checking);

@@ -14,10 +14,9 @@ function sentMessage(email,online=true) {
   socket.emit('onlineStatus', { email , online });
 }
 function getMessages(cb) {
-  socket.on('messages',success =>cb(success));
+  socket.on('messages1',success2 =>cb(success2));
 }
 function logoutAck(email) {
-  debugger;
   socket.emit('removeAck',{email});
 }
 function recieveAck(cb) {

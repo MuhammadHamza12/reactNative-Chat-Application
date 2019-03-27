@@ -48,6 +48,12 @@ export function setCurrentUser(data){
         payload:data,
     }
 }
+export function setStatusToRedux(Sdata) {
+    return {
+        type:actionTypes.SET_ALL_STATUS_TO_REDUX,
+        payload:Sdata,
+    }
+}
 export function logout(){
     return (dispatch) => {
        if(removeItemValue('jwtToken')){
