@@ -28,8 +28,9 @@ export class Active extends Component {
   }
   
   render() {
-    console.log('active props',this.props);
     const { allStatus } = this.props.sData;
+    console.log('active props',this.props)
+    console.log('allStatus in profile',allStatus)
     const ListCom = allStatus.map((l, i) => (
       <ListItem
         key={i}
@@ -52,7 +53,7 @@ export class Active extends Component {
        </View>
    
        <View style={{position:'absolute',left:0,right:0,bottom:0}}> 
-   <FooterTabsExample /> 
+       <FooterTabsExample allStatus={allStatus} /> 
        </View>
        </View>
     )
