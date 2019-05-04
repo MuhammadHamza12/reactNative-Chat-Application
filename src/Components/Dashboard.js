@@ -155,9 +155,9 @@ onSend(messages = []) {
        
       </View>
   
-      <View style={{flex: .1}}> 
-  <FooterTabsExample allStatus={allStatus}   /> 
-      </View>
+      <View style={{flex:.1}}> 
+       <FooterTabsExample allStatus={allStatus} /> 
+       </View>
       </View>
     )
   }

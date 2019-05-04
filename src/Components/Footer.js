@@ -126,7 +126,7 @@ class FooterTabsExample extends Component {
             <Button onPress={()=>Actions.active()} badge vertical >
             <Badge><Text>{ this.state.isLoading ? <Icon name='timer' style={{fontSize:15}} /> : allStatus.length}</Text></Badge>
             <Icon name='people' />
-              <Text>Active</Text> 
+              <Text>Freinds</Text> 
             </Button>
             <Button onPress={this.PureLogout}  >
             <Icon name='arrow-back' />
